@@ -1,0 +1,14 @@
+---
+- name: Copy file form local to remote server
+  hosts: all
+
+  tasks:
+  - name: coping file
+    become: true
+    copy:
+     src: /home/user/some.cfg
+     dest: /tmp
+     owner: user
+     group: user
+     mode: 0644
+     

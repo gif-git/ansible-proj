@@ -1,0 +1,21 @@
+---
+- name: Install Google Chrome
+  hosts: [researcher]
+  become: true
+  tasks:
+    - name: Install apt-transport-https
+      ansible.builtin.apt:
+        state: latest
+        update_cache: true
+
+    - name: Add Apt signing key
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+        state: present
+        filename: google-chrome
+    
+    - name: Install google-chrom-stable
+      ansible.builtin.apt:
+        name: "google-chrome-stable"
+        state: latest
+        update_cache: true
