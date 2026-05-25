@@ -1,0 +1,81 @@
+ansible-project/
+│
+├── ansible.cfg
+├── requirements.yml
+├── site.yml
+│
+├── inventories/
+│   ├── dev/
+│   │   ├── hosts.ini
+│   │   ├── group_vars/
+│   │   └── host_vars/
+│   │
+│   ├── stage/
+│   │   ├── hosts.ini
+│   │   ├── group_vars/
+│   │   └── host_vars/
+│   │
+│   └── prod/
+│       ├── hosts.ini
+│       ├── group_vars/
+│       └── host_vars/
+│
+├── playbooks/
+│   ├── webservers.yml
+│   ├── databases.yml
+│   ├── monitoring.yml
+│   ├── security.yml
+│   └── deploy-app.yml
+│
+├── roles/
+│   ├── apache/
+│   │   ├── defaults/
+│   │   │   └── main.yml
+│   │   ├── files/
+│   │   ├── handlers/
+│   │   │   └── main.yml
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   ├── templates/
+│   │   ├── vars/
+│   │   │   └── main.yml
+│   │   ├── tests/
+│   │   └── meta/
+│   │
+│   ├── php/
+│   ├── mysql/
+│   ├── security/
+│   ├── docker/
+│   ├── users/
+│   └── monitoring/
+│
+├── group_vars/
+│   ├── all.yml
+│   ├── webservers.yml
+│   ├── databases.yml
+│   └── production.yml
+│
+├── host_vars/
+│   ├── web01.yml
+│   ├── web02.yml
+│   └── db01.yml
+│
+├── templates/
+│   ├── apache-vhost.conf.j2
+│   ├── php.ini.j2
+│   └── my.cnf.j2
+│
+├── files/
+│   ├── ssl/
+│   ├── scripts/
+│   └── configs/
+│
+├── vars/
+│   ├── dev.yml
+│   ├── stage.yml
+│   └── prod.yml
+│
+└── vault/
+    ├── dev-vault.yml
+    ├── stage-vault.yml
+    └── prod-vault.yml

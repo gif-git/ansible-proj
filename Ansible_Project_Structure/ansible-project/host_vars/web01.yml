@@ -1,0 +1,3 @@
+# host_vars/web01.yml
+
+domain_name: app.company.com

@@ -1,0 +1,4 @@
+# group_vars/webservers.yml
+
+apache_port: 80
+php_version: 8.2
