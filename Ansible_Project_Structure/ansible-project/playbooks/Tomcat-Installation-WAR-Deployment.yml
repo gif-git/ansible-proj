@@ -1,0 +1,31 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+
+    - name: install java
+      yum:
+        name: java-1.8.0-openjdk
+        state: present
+
+    - name: Download Tomcat tar file
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.110/bin/apache-tomcat-9.0.110.tar.gz
+        dest: /opt
+
+    - name: Extract tomcat into /opt
+      unarchive:
+        src: /opt/apache-tomcat-9.0.110.tar.gz          # Worker Node
+        dest: /opt                                      # Worker Node
+        remote_src: yes
+
+    - name: Start Tomcat
+      shell: nohup /opt/apache-tomcat-9.0.110/bin/startup.sh &
+
+    - name: Copy Sample.war to Tomcat from Ansible Master
+      copy:
+        src: /home/ec2-user/sample.war                        # Ansible Node
+        dest: /opt/apache-tomcat-9.0.110/webapps/sample.war   # Worker Node
