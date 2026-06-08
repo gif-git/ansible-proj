@@ -1,0 +1,77 @@
+---
+- name: Install Apache and PHP
+  hosts: webservers
+  become: yes
+
+  tasks:
+
+    - name: Update apt cache on Debian systems
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    #################################################################
+    # Apache Installation
+    #################################################################
+
+    - name: Install Apache on Debian
+      apt:
+        name: apache2
+        state: present
+
+    #################################################################
+    # PHP Installation
+    #################################################################
+
+    - name: Install PHP packages on Debian
+      apt:
+        name:
+          - php
+          - php-cli
+          - php-common
+          - php-mysql
+          - php-gd
+          - php-xml
+          - php-mbstring
+          - php-curl
+          - php-zip
+          - php-opcache
+        state: present
+
+    #################################################################
+    # Service Management
+    #################################################################
+
+    - name: Start Apache on Debian
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    #################################################################
+    # Firewall Configuration
+    #################################################################
+
+    - name: Allow HTTP in UFW
+      community.general.ufw:
+        rule: allow
+        port: "80"
+        proto: tcp
+
+    - name: Allow HTTPS in UFW
+      community.general.ufw:
+        rule: allow
+        port: "443"
+        proto: tcp
+
+    #################################################################
+    # PHP Test Page
+    #################################################################
+
+    - name: Create PHP info page on Debian
+      copy:
+        dest: /var/www/html/info.php
+        content: |
+          <?php
+          phpinfo();
+          ?>
